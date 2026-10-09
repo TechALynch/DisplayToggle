@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="640" viewBox="0 0 900 640" font-family="Segoe UI, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif">
+  <title>How a toggle works</title>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8a8a8a"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="640" rx="14" fill="#202020"/>
+
+  <!-- Start -->
+  <rect x="270" y="24" width="360" height="56" rx="10" fill="#2b2b2b" stroke="#3a3a3a"/>
+  <text x="450" y="50" font-size="15" font-weight="600" fill="#ffffff" text-anchor="middle">You click a switch</text>
+  <text x="450" y="69" font-size="12" fill="#c8c8c8" text-anchor="middle">or a box in the map, or press 1 to 9</text>
+  <line x1="450" y1="80" x2="450" y2="104" stroke="#8a8a8a" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Read -->
+  <rect x="270" y="106" width="360" height="56" rx="10" fill="#2b2b2b" stroke="#3a3a3a"/>
+  <text x="450" y="132" font-size="15" font-weight="600" fill="#ffffff" text-anchor="middle">Read the current display setup</text>
+  <text x="450" y="151" font-size="12" fill="#F38064" text-anchor="middle" font-family="Cascadia Mono, Consolas, monospace">QueryDisplayConfig</text>
+
+  <path d="M450 162 L450 178 L225 178 L225 198" stroke="#8a8a8a" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M450 178 L675 178 L675 198" stroke="#8a8a8a" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Column headers -->
+  <text x="225" y="220" font-size="13" font-weight="600" fill="#c8c8c8" text-anchor="middle" letter-spacing="1">TURNING OFF</text>
+  <text x="675" y="220" font-size="13" font-weight="600" fill="#c8c8c8" text-anchor="middle" letter-spacing="1">TURNING ON</text>
+
+  <!-- Off column -->
+  <rect x="40" y="234" width="370" height="62" rx="10" fill="#2b2b2b" stroke="#3a3a3a"/>
+  <text x="58" y="260" font-size="14" font-weight="600" fill="#ffffff">Leave that display out</text>
+  <text x="58" y="280" font-size="12" fill="#c8c8c8">Refuses if it's the last display that's on.</text>
+  <line x1="225" y1="296" x2="225" y2="318" stroke="#8a8a8a" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="40" y="320" width="370" height="80" rx="10" fill="#2b2b2b" stroke="#3a3a3a"/>
+  <text x="58" y="346" font-size="14" font-weight="600" fill="#ffffff">Close the gap</text>
+  <text x="58" y="366" font-size="12" fill="#c8c8c8">Displays to its right (or below) slide over.</text>
+  <text x="58" y="384" font-size="12" fill="#c8c8c8">If it was the main display, the biggest one left takes over.</text>
+  <line x1="225" y1="400" x2="225" y2="422" stroke="#8a8a8a" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="40" y="424" width="370" height="80" rx="10" fill="#2b2b2b" stroke="#3a3a3a"/>
+  <text x="58" y="450" font-size="14" font-weight="600" fill="#ffffff">Apply it and save it</text>
+  <text x="58" y="470" font-size="12" fill="#F38064" font-family="Cascadia Mono, Consolas, monospace">SetDisplayConfig</text>
+  <text x="58" y="488" font-size="12" fill="#c8c8c8">Saved in Windows' display database, so it sticks.</text>
+
+  <!-- On column -->
+  <rect x="490" y="234" width="370" height="62" rx="10" fill="#2b2b2b" stroke="#3a3a3a"/>
+  <text x="508" y="260" font-size="14" font-weight="600" fill="#ffffff">Find a free video output</text>
+  <text x="508" y="280" font-size="12" fill="#c8c8c8">on the graphics card for that display.</text>
+  <line x1="675" y1="296" x2="675" y2="318" stroke="#8a8a8a" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="490" y="320" width="370" height="80" rx="10" fill="#2b2b2b" stroke="#F38064"/>
+  <text x="508" y="346" font-size="14" font-weight="600" fill="#ffffff">1. Restore Windows' saved layout</text>
+  <text x="508" y="366" font-size="12" fill="#c8c8c8">for this exact set of displays: position,</text>
+  <text x="508" y="384" font-size="12" fill="#c8c8c8">resolution, rotation and refresh rate.</text>
+  <line x1="675" y1="400" x2="675" y2="422" stroke="#8a8a8a" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arrow)"/>
+  <text x="687" y="415" font-size="11" fill="#8a8a8a">only if none is saved</text>
+
+  <rect x="490" y="424" width="370" height="80" rx="10" fill="#2b2b2b" stroke="#3a3a3a" stroke-dasharray="5 4"/>
+  <text x="508" y="450" font-size="14" font-weight="600" fill="#ffffff">2. Add it, then move it into place</text>
+  <text x="508" y="470" font-size="12" fill="#c8c8c8">Windows picks a resolution; the app moves it to</text>
+  <text x="508" y="488" font-size="12" fill="#c8c8c8">where it sat the last time every display was on.</text>
+
+  <!-- Join -->
+  <path d="M225 504 L225 530 L450 530 L450 552" stroke="#8a8a8a" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M675 504 L675 530 L450 530" stroke="#8a8a8a" stroke-width="2" fill="none"/>
+
+  <rect x="270" y="554" width="360" height="62" rx="10" fill="#2b2b2b" stroke="#3a3a3a"/>
+  <text x="450" y="580" font-size="15" font-weight="600" fill="#ffffff" text-anchor="middle">Popup refreshes</text>
+  <text x="450" y="600" font-size="12" fill="#c8c8c8" text-anchor="middle">The switches show the new state. No Keep/Revert prompt.</text>
+</svg>
