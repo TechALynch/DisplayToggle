@@ -12,7 +12,8 @@
     (%LOCALAPPDATA%\Programs\DisplayToggle, desktop + Start menu icons, Installed apps entry).
 
 .PARAMETER Package
-    Also copies the release files and a SHA256SUMS.txt into dist\, ready to attach to a GitHub release.
+    Also puts the release files (both .exe files, zipped copies of each, and SHA256SUMS.txt) into dist\,
+    ready to attach to a GitHub release.
 #>
 param([switch]$Install, [switch]$Package)
 
@@ -50,7 +51,10 @@ if ($Package) {
     if (Test-Path $dist) { Remove-Item $dist -Recurse -Force }
     New-Item -ItemType Directory -Path $dist | Out-Null
     Copy-Item $setup, $exe $dist
-    $sums = Get-ChildItem $dist -Filter *.exe | Sort-Object Name | ForEach-Object {
+    # Zipped copies: browsers are much less likely to hold back a .zip than a new, unsigned .exe.
+    Compress-Archive -Path $setup, (Join-Path $root 'LICENSE') -DestinationPath (Join-Path $dist 'DisplayToggle-Setup.zip')
+    Compress-Archive -Path $exe, (Join-Path $root 'LICENSE') -DestinationPath (Join-Path $dist 'DisplayToggle-Portable.zip')
+    $sums = Get-ChildItem $dist -Include *.exe, *.zip -Recurse | Sort-Object Name | ForEach-Object {
         (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLower() + '  ' + $_.Name
     }
     Set-Content (Join-Path $dist 'SHA256SUMS.txt') $sums -Encoding ascii

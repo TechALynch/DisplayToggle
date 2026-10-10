@@ -72,9 +72,10 @@ Display Toggle puts all of that behind one desktop icon. Double-click it, flip a
 
 ### Option 1: Installer (recommended)
 
-1. Download **[DisplayToggle-Setup.exe](../../releases/latest/download/DisplayToggle-Setup.exe)** from the
-   [latest release](../../releases/latest).
-2. Double-click it and choose **Yes**.
+1. Download **[DisplayToggle-Setup.zip](../../releases/latest/download/DisplayToggle-Setup.zip)** from the
+   [latest release](../../releases/latest). (A plain [DisplayToggle-Setup.exe](../../releases/latest/download/DisplayToggle-Setup.exe)
+   is there too, but browsers are more likely to hold back a new `.exe` download than a `.zip`.)
+2. Open the zip, double-click **DisplayToggle-Setup.exe**, and choose **Yes**.
 
 That's it. A **Display Toggle** icon appears on your desktop and in the Start menu. The installer:
 
@@ -87,8 +88,9 @@ For IT deployment, `DisplayToggle-Setup.exe /S` installs silently.
 
 ### Option 2: Portable, no install
 
-Download **[DisplayToggle.exe](../../releases/latest/download/DisplayToggle.exe)**, put it anywhere (a USB stick works),
-and double-click it. Nothing is installed, and no icons are created.
+Download **[DisplayToggle-Portable.zip](../../releases/latest/download/DisplayToggle-Portable.zip)** (or the bare
+[DisplayToggle.exe](../../releases/latest/download/DisplayToggle.exe)), put `DisplayToggle.exe` anywhere (a USB stick
+works), and double-click it. Nothing is installed, and no icons are created.
 
 ### Option 3: Build from source
 
@@ -105,7 +107,9 @@ Leave off `-Install` to only build. If PowerShell says running scripts is disabl
 
 ### "Windows protected your PC"?
 
-The downloads aren't code-signed yet, so Microsoft SmartScreen may show this warning the first time. Choose
+The downloads aren't code-signed yet. If your browser holds the download back ("isn't commonly downloaded"), open
+its Downloads list, click **⋯** next to the file › **Keep** › **Show more** › **Keep anyway**. When you run it, Microsoft
+SmartScreen may also show "Windows protected your PC". Choose
 **More info › Run anyway**. To confirm your download wasn't tampered with, compare its SHA-256 hash with
 `SHA256SUMS.txt` on the release page:
 
