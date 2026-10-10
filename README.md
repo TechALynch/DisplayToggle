@@ -70,31 +70,57 @@ Display Toggle puts all of that behind one desktop icon. Double-click it, flip a
 
 ## Install
 
-1. Get the source: click **Code › Download ZIP** at the top of this page and unzip it, or `git clone` this repository.
+### Option 1: Installer (recommended)
+
+1. Download **[DisplayToggle-Setup.exe](../../releases/latest/download/DisplayToggle-Setup.exe)** from the
+   [latest release](../../releases/latest).
+2. Double-click it and choose **Yes**.
+
+That's it. A **Display Toggle** icon appears on your desktop and in the Start menu. The installer:
+
+- installs for your Windows account only, in `%LOCALAPPDATA%\Programs\DisplayToggle`, so **no admin rights** are needed;
+- adds the desktop and Start menu icons;
+- adds Display Toggle to **Settings › Apps › Installed apps**, so you can uninstall it like any other app;
+- updates an older copy in place if you run a newer installer.
+
+For IT deployment, `DisplayToggle-Setup.exe /S` installs silently.
+
+### Option 2: Portable, no install
+
+Download **[DisplayToggle.exe](../../releases/latest/download/DisplayToggle.exe)**, put it anywhere (a USB stick works),
+and double-click it. Nothing is installed, and no icons are created.
+
+### Option 3: Build from source
+
+1. Click **Code › Download ZIP** at the top of this page and unzip it, or `git clone` this repository.
 2. Open PowerShell in the `DisplayToggle` folder and run:
 
    ```powershell
    .\build.ps1 -Install
    ```
 
-`-Install` builds the app, copies it to `%LOCALAPPDATA%\Programs\DisplayToggle\DisplayToggle.exe`, and puts a
-**Display Toggle** shortcut on your desktop. Run `.\build.ps1` without `-Install` to only build `bin\DisplayToggle.exe`.
+This builds `bin\DisplayToggle.exe` and `bin\DisplayToggle-Setup.exe`, then runs the installer silently.
+Leave off `-Install` to only build. If PowerShell says running scripts is disabled, use
+`powershell -ExecutionPolicy Bypass -File .\build.ps1 -Install`.
 
-> **Scripts blocked?** If PowerShell says running scripts is disabled, run
-> `powershell -ExecutionPolicy Bypass -File .\build.ps1 -Install` instead.
+### "Windows protected your PC"?
 
-> **"Windows protected your PC"?** The app isn't code-signed, so SmartScreen may warn the first time you open it.
-> Choose **More info › Run anyway**. Because you built it yourself from this source, you know what's in it.
+The downloads aren't code-signed yet, so Microsoft SmartScreen may show this warning the first time. Choose
+**More info › Run anyway**. To confirm your download wasn't tampered with, compare its SHA-256 hash with
+`SHA256SUMS.txt` on the release page:
 
-**Tip:** right-click the desktop shortcut › **Properties** › **Shortcut key** to give it a hotkey such as `Ctrl + Alt + D`.
+```powershell
+Get-FileHash .\DisplayToggle-Setup.exe -Algorithm SHA256
+```
+
+**Tip:** right-click the desktop icon › **Properties** › **Shortcut key** to give it a hotkey such as `Ctrl + Alt + D`.
 
 ### Uninstall
 
-Delete these three things:
+Open **Settings › Apps › Installed apps**, find **Display Toggle**, and choose **Uninstall**. That removes the app,
+its icons, and its saved layout and log.
 
-- `%LOCALAPPDATA%\Programs\DisplayToggle` (the app)
-- `%LOCALAPPDATA%\DisplayToggle` (remembered layout and log)
-- **Display Toggle** on your desktop
+Using the portable `.exe`? Delete it, and optionally delete `%LOCALAPPDATA%\DisplayToggle` (saved layout and log).
 
 ## Using it
 
@@ -254,7 +280,9 @@ Everything lives in `%LOCALAPPDATA%\DisplayToggle`. Nothing is sent anywhere.
 | `src/AssemblyInfo.cs` | Version, company and copyright shown in the `.exe`'s Properties; DLL-loading hardening |
 | `src/app.manifest` | Per-monitor DPI awareness, runs without admin rights |
 | `tools/New-AppIcon.ps1` | Draws the app icon and writes a multi-size `.ico` |
-| `build.ps1` | Builds the `.exe` (and installs it with `-Install`) |
+| `installer/Setup.cs` | The installer/uninstaller (per-user, no admin). The app is embedded inside it. |
+| `installer/setup.manifest` | Keeps the installer from asking for admin rights |
+| `build.ps1` | Builds the app and installer; `-Install` installs on this PC, `-Package` prepares release files in `dist\` |
 | `LICENSE` | MIT License |
 
 ## Troubleshooting
